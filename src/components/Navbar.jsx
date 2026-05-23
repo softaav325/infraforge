@@ -56,7 +56,7 @@ const Navbar = () => {
           <div className="w-8 h-8 bg-premium-primary rounded-lg rotate-45 group-hover:rotate-90 transition-transform duration-500 flex items-center justify-center">
             <div className="w-3 h-3 bg-white rounded-full" />
           </div>
-          <span className="text-xl font-bold tracking-tighter text-white">SYTE<span className="text-premium-primary">2</span></span>
+          <span className="text-xl font-bold tracking-tighter text-white">INFRA<span className="text-premium-primary">FORGE</span></span>
         </motion.div>
 
         {/* Desktop Navigation */}
