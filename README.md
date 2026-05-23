@@ -73,10 +73,10 @@ This portfolio is more than just a showcase; it's a technical demonstration of p
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/syte2.git
+git clone https://github.com/yourusername/infraforge.git
 
 # Navigate to project directory
-cd syte2
+cd infraforge
 
 # Install dependencies
 npm install
@@ -103,7 +103,7 @@ npm run preview
 ## 📂 Project Structure
 
 ```text
-syte2/
+infraforge/
 ├── src/
 │   ├── components/
 │   │   ├── UI.jsx          # Core Design System (Atomic components)
