@@ -26,7 +26,7 @@ function App() {
       </motion.main>
       <footer className="py-12 border-t border-white/5 text-center relative z-10">
         <p className="text-gray-500 text-sm font-medium">
-          © {new Date().getFullYear()} Syte2 Infrastructure. <span className="text-premium-primary">Built for Scale.</span>
+          © {new Date().getFullYear()} Infraforge Infrastructure. <span className="text-premium-primary">Built for Scale.</span>
         </p>
       </footer>
     </div>
