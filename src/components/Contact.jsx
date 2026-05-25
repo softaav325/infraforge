@@ -18,10 +18,25 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setFormState('submitting');
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    setFormState('success');
-    setTimeout(() => setFormState('idle'), 3000);
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Something went wrong');
+      }
+
+      setFormState('success');
+      setTimeout(() => setFormState('idle'), 5000);
+    } catch (error) {
+      alert(error.message);
+      setFormState('idle');
+    }
   };
 
   return (
