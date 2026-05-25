@@ -1,14 +1,14 @@
 import { Resend } from 'resend';
-import { NextResponse } from 'next/server';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   try {
-    const { name, email, message, subject } = await req.json();
+    const body = await req.json();
+    const { name, email, message, subject } = body;
 
     if (!name || !email || !message) {
-      return NextResponse.json(
+      return Response.json(
         { error: 'Missing required fields' },
         { status: 400 }
       );
@@ -16,7 +16,7 @@ export async function POST(req: Request) {
 
     const contactEmail = process.env.CONTACT_EMAIL;
     if (!contactEmail) {
-      return NextResponse.json(
+      return Response.json(
         { error: 'Server configuration error: CONTACT_EMAIL missing' },
         { status: 500 }
       );
@@ -42,16 +42,16 @@ export async function POST(req: Request) {
     const { data: result, error } = await resend.emails.send(data);
 
     if (error) {
-      return NextResponse.json(
+      return Response.json(
         { error: error.message },
         { status: 400 }
       );
     }
 
-    return NextResponse.json({ success: true, id: result?.id }, { status: 200 });
+    return Response.json({ success: true, id: result?.id }, { status: 200 });
   } catch (error: any) {
     console.error('Contact form error:', error);
-    return NextResponse.json(
+    return Response.json(
       { error: error.message || 'Internal server error' },
       { status: 500 }
     );
