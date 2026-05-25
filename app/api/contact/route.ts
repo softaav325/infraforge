@@ -43,7 +43,7 @@ export async function POST(req: Request) {
 
     if (error) {
       return Response.json(
-        { error: error.message },
+        { error: error.message || 'Failed to send email' },
         { status: 400 }
       );
     }
