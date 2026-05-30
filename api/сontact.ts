@@ -1,9 +1,19 @@
 // api/contact.ts
-import { Resend } from 'resend';
+// import { Resend } from 'resend';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export default async function handler(request: Request) {
+import type { VercelRequest, VercelResponse } from '@vercel/node';
+
+export default async function handler(
+  req: VercelRequest,
+  res: VercelResponse
+) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({
+      error: 'Method not allowed'
+    });
   
   const origin = request.headers.get('origin') || '*';
   const corsHeaders = {
