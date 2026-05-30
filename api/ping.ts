@@ -1,4 +1,8 @@
-// api/ping.ts
-export default function handler() {
-  return new Response("pong");
+import type { VercelRequest, VercelResponse } from '@vercel/node';
+
+export default function handler(
+  req: VercelRequest,
+  res: VercelResponse
+) {
+  res.status(200).send('pong');
 }
