@@ -1,55 +1,40 @@
-// api/contact.ts
-// import { Resend } from 'resend';
-import type { VercelRequest, VercelResponse } from '@vercel/node';
+// api/contact.js
+const { Resend } = require('resend');
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-
-export default async function handler(
-  req: VercelRequest,
-  res: VercelResponse
-) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({
-      error: 'Method not allowed'
-    });
-  
-  const origin = request.headers.get('origin') || '*';
+module.exports = async (req, res) => {
+  const origin = req.headers.origin || '*';
   const corsHeaders = {
     'Access-Control-Allow-Origin': origin,
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
   };
 
-  if (request.method === 'OPTIONS') {
-    return new Response(null, { status: 204, headers: corsHeaders });
+  if (req.method === 'OPTIONS') {
+    return res.setHeader('Access-Control-Allow-Origin', origin).status(204).end();
   }
 
-  if (request.method !== 'POST') {
-    return new Response(
-      JSON.stringify({ error: 'Method not allowed' }),
-      { status: 405, headers: { 'Content-Type': 'application/json', ...corsHeaders } }
-    );
+  if (req.method !== 'POST') {
+    return res.status(405).setHeader('Content-Type', 'application/json').setHeader('Access-Control-Allow-Origin', origin).json({ 
+      error: 'Method not allowed' 
+    });
   }
 
   try {
-    const body = await request.json();
-    const { name, email, message, subject } = body;
+    const { name, email, message, subject } = req.body;
 
     if (!name || !email || !message) {
-      return new Response(
-        JSON.stringify({ error: 'Missing required fields' }),
-        { status: 400, headers: { 'Content-Type': 'application/json', ...corsHeaders } }
-      );
+      return res.status(400).setHeader('Content-Type', 'application/json').setHeader('Access-Control-Allow-Origin', origin).json({ 
+        error: 'Missing required fields' 
+      });
     }
 
     const contactEmail = process.env.CONTACT_EMAIL;
     if (!contactEmail) {
-      return new Response(
-        JSON.stringify({ error: 'Server configuration error: CONTACT_EMAIL missing' }),
-        { status: 500, headers: { 'Content-Type': 'application/json', ...corsHeaders } }
-      );
+      return res.status(500).setHeader('Content-Type', 'application/json').setHeader('Access-Control-Allow-Origin', origin).json({ 
+        error: 'Server configuration error: CONTACT_EMAIL missing' 
+      });
     }
 
     const emailData = {
@@ -73,22 +58,20 @@ export default async function handler(
     const { data: result, error } = await resend.emails.send(emailData);
 
     if (error) {
-      return new Response(
-        JSON.stringify({ error: error.message || 'Failed to send email' }),
-        { status: 400, headers: { 'Content-Type': 'application/json', ...corsHeaders } }
-      );
+      return res.status(400).setHeader('Content-Type', 'application/json').setHeader('Access-Control-Allow-Origin', origin).json({ 
+        error: error.message || 'Failed to send email' 
+      });
     }
 
-    return new Response(
-      JSON.stringify({ success: true, id: result?.id }),
-      { status: 200, headers: { 'Content-Type': 'application/json', ...corsHeaders } }
-    );
+    return res.status(200).setHeader('Content-Type', 'application/json').setHeader('Access-Control-Allow-Origin', origin).json({ 
+      success: true, 
+      id: result?.id 
+    });
 
-  } catch (error: any) {
+  } catch (error) {
     console.error('Contact form error:', error);
-    return new Response(
-      JSON.stringify({ error: error.message || 'Internal server error' }),
-      { status: 500, headers: { 'Content-Type': 'application/json', ...corsHeaders } }
-    );
+    return res.status(500).setHeader('Content-Type', 'application/json').setHeader('Access-Control-Allow-Origin', origin).json({ 
+      error: error.message || 'Internal server error' 
+    });
   }
-}
+};
