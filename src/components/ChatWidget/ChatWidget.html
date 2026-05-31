@@ -1,0 +1,31 @@
+<!-- Chat Widget Container -->
+<div id="chat-widget">
+    <!-- Open/Close Button -->
+    <button id="chat-widget-button">
+        Чат
+    </button>
+
+    <!-- Chat Window -->
+    <div id="chat-window" style="display: none;">
+        <!-- Header -->
+        <div id="chat-header">
+            <span>Поддержка InfraForge</span>
+            <button id="chat-close-button">&times;</button>
+        </div>
+
+        <!-- Messages List -->
+        <div id="chat-messages">
+            <!-- Example messages -->
+            <div class="message bot">Здравствуйте! Чем я могу вам помочь?</div>
+            <div class="message user">Привет! Расскажите о проекте.</div>
+        </div>
+
+        <!-- Input Area -->
+        <form id="chat-input-form">
+            <input type="text" id="chat-input-field" placeholder="Введите сообщение..." required>
+            <button type="submit" id="chat-send-button">
+                Отправить
+            </button>
+        </form>
+    </div>
+</div>
