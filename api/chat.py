@@ -12,10 +12,8 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     response: str
 
-# Конфигурация OpenRouter
 OPENROUTER_API_KEY = getattr(settings, "openrouter_api_key", os.getenv("openrouter_api_key"))
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
-# Модель может быть задана в конфиге, либо будет использована заглушка OpenRouter для авто-выбора
 MODEL_NAME = getattr(settings, "openrouter_model", "openrouter/auto") 
 
 @router.post("/chat", response_model=ChatResponse)

@@ -7,6 +7,7 @@ import Projects from './components/Projects';
 import About from './components/About';
 import TechStack from './components/TechStack';
 import Contact from './components/Contact';
+import ChatWidget from './components/ChatWidget/ChatWidget';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           © {new Date().getFullYear()} Infraforge Infrastructure. <span className="text-premium-primary">Built for Scale.</span>
         </p>
       </footer>
+      <ChatWidget />
     </div>
   );
 }

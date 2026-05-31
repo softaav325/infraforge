@@ -1,6 +1,6 @@
 import { sendMessage } from './api.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+export const initChat = () => {
     const widgetButton = document.getElementById('chat-widget-button');
     const chatWindow = document.getElementById('chat-window');
     const closeButton = document.getElementById('chat-close-button');
@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputForm = document.getElementById('chat-input-form');
     const inputField = document.getElementById('chat-input-field');
     const sendButton = document.getElementById('chat-send-button');
+
+    if (!widgetButton || !chatWindow) return;
 
     // Toggle chat window visibility
     const toggleChat = () => {
@@ -72,8 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     inputForm.addEventListener('submit', handleSend);
+};
 
-    // Enter key is already handled by the form submit event, 
-    // but if it's not a form, you'd use:
-    // inputField.addEventListener('keypress', (e) => { if(e.key === 'Enter') handleSend(e); });
-});
+// Keep compatibility for static HTML
+if (typeof document !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', initChat);
+}
