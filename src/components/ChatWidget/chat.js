@@ -28,7 +28,10 @@ export const initChat = () => {
         messagesContainer.appendChild(messageDiv);
         
         // Auto-scroll to bottom
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        messagesContainer.scrollTo({
+            top: messagesContainer.scrollHeight,
+            behavior: 'smooth'
+        });
     };
 
     // Loading indicator
@@ -37,7 +40,7 @@ export const initChat = () => {
             const loadingDiv = document.createElement('div');
             loadingDiv.className = 'message bot loading';
             loadingDiv.id = 'chat-loading';
-            loadingDiv.textContent = 'Печатает...';
+            loadingDiv.textContent = 'Typing...';
             messagesContainer.appendChild(loadingDiv);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
             sendButton.disabled = true;
@@ -65,9 +68,9 @@ export const initChat = () => {
         try {
             const data = await sendMessage(text);
             // Assuming response format: { response: "..." }
-            addMessage(data.response || data.message || 'Ответ получен', 'bot');
+            addMessage(data.response || data.message || 'Response received', 'bot');
         } catch (error) {
-            addMessage(`Ошибка: ${error.message}`, 'bot');
+            addMessage(`Error: ${error.message}`, 'bot');
         } finally {
             setCastingState(false);
         }

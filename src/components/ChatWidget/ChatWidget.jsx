@@ -14,11 +14,11 @@ const ChatWidget = () => {
                     <button id="chat-close-button">&times;</button>
                 </div>
                 <div id="chat-messages">
-                    <div class="message bot">Здравствуйте! Чем я могу вам помочь?</div>
-                    <div class="message user">Привет! Расскажите о проекте.</div>
+                    <div class="message bot">Hello! How can I help you today?</div>
+                    <div class="message user">Hi! Tell me more about the project.</div>
                 </div>
                 <form id="chat-input-form">
-                    <input type="text" id="chat-input-field" placeholder="Введите сообщение..." required>
+                    <input type="text" id="chat-input-field" placeholder="Type your message..." required>
                     <button type="submit" id="chat-send-button">Send</button>
                 </form>
             </div>
