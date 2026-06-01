@@ -1,3 +1,11 @@
 {
-  "framework": "vite"
+  "builds": [
+    {
+      "src": "api/Chat.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    { "src": "/api/Chat", "dest": "api/Chat.py" }
+  ]
 }
