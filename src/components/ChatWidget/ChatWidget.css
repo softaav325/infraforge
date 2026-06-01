@@ -21,6 +21,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    /* Add color text */
+    color: var(--chat-text-main); 
 }
 
 /* Open/Close Button */
@@ -55,6 +57,7 @@
     flex-direction: column;
     overflow: hidden;
     margin-bottom: 15px;
+    color: var(--chat-text-main); /* Color in window */
 }
 
 /* Header */
@@ -131,6 +134,13 @@
     outline: none;
     font-size: 14px;
     transition: border-color 0.2s;
+
+    /* Color for text on wite fone */
+    color: var(--chat-text-main) !important; 
+    background-color: var(--chat-bg-main); 
+    
+    /* Style (helping) */
+    caret-color: var(--chat-primary); /* Cursor */
 }
 
 #chat-input-field:focus {
