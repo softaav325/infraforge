@@ -18,7 +18,11 @@ export const initChat = () => {
     };
 
     widgetButton.addEventListener('click', toggleChat);
-    closeButton.addEventListener('click', toggleChat);
+    
+    // Проверяем наличие кнопки закрытия перед добавлением обработчика
+    if (closeButton) {
+        closeButton.addEventListener('click', toggleChat);
+    }
 
     // Render message to the UI
     const addMessage = (text, sender) => {
@@ -43,13 +47,13 @@ export const initChat = () => {
             loadingDiv.textContent = 'Typing...';
             messagesContainer.appendChild(loadingDiv);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            sendButton.disabled = true;
-            inputField.disabled = true;
+            if (sendButton) sendButton.disabled = true;
+            if (inputField) inputField.disabled = true;
         } else {
             const loadingDiv = document.getElementById('chat-loading');
             if (loadingDiv) loadingDiv.remove();
-            sendButton.disabled = false;
-            inputField.disabled = false;
+            if (sendButton) sendButton.disabled = false;
+            if (inputField) inputField.disabled = false;
         }
     };
 
@@ -67,8 +71,8 @@ export const initChat = () => {
 
         try {
             const data = await sendMessage(text);
-            // Assuming response format: { response: "..." }
-            addMessage(data.response || data.message || 'Response received', 'bot');
+            // Use data.answer, retern backenf (chat.ts)
+            addMessage(data.answer || 'Не удалось получить ответ', 'bot');
         } catch (error) {
             addMessage(`Error: ${error.message}`, 'bot');
         } finally {
@@ -76,10 +80,16 @@ export const initChat = () => {
         }
     };
 
-    inputForm.addEventListener('submit', handleSend);
+    if (inputForm) {
+        inputForm.addEventListener('submit', handleSend);
+    }
 };
 
 // Keep compatibility for static HTML
 if (typeof document !== 'undefined') {
-    document.addEventListener('DOMContentLoaded', initChat);
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initChat);
+    } else {
+        initChat();
+    }
 }
