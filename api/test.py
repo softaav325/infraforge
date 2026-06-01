@@ -9,7 +9,7 @@ def handler(req, env):
         },
         'body': json.dumps({
             'status': 'success',
-            'message': 'Python API работает на Vercel!',
+            'message': 'Python API работает!',
             'test': True
         })
     }
