@@ -118,11 +118,11 @@ const Hero = () => {
           transition={{ delay: 0.6 }}
           className="flex justify-center gap-8 mb-20"
         >
-           {[
-             { icon: <span className="text-xl">🐙</span>, link: "https://github.com/softaav325/" },
-             { icon: <span className="text-xl">💼</span>, link: "https://linkedin.com/in/alexey-andreychenko-a68716358/" },
-             { icon: <span className="text-xl">🐦</span>, link: "#" },
-           ].map((social, i) => (
+            {[
+              { icon: <span className="text-xl">GitHub</span>, link: "https://github.com/softaav325/" },
+              { icon: <span className="text-xl">LinkedIn</span>, link: "https://linkedin.com/in/alexey-andreychenko-a68716358/" },
+              { icon: <span className="text-xl">✈️</span>, link: "https://t.me/AlexeyV2023" },
+            ].map((social, i) => (
             <a 
               key={i} 
               href={social.link} 
