@@ -119,8 +119,8 @@ const Hero = () => {
           className="flex justify-center gap-8 mb-20"
         >
            {[
-             { icon: <span className="text-xl">🐙</span>, link: "#" },
-             { icon: <span className="text-xl">💼</span>, link: "#" },
+             { icon: <span className="text-xl">🐙</span>, link: "https://github.com/softaav325/" },
+             { icon: <span className="text-xl">💼</span>, link: "https://linkedin.com/in/alexey-andreychenko-a68716358/" },
              { icon: <span className="text-xl">🐦</span>, link: "#" },
            ].map((social, i) => (
             <a 
