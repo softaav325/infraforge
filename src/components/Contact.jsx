@@ -70,13 +70,13 @@ const Contact = () => {
             {/* Social & Booking Matrix */}
             <div className="space-y-6 mb-12">
               <div className="grid grid-cols-2 gap-4">
-                <a href="#" className="group p-4 glass rounded-premium flex items-center gap-4 hover:border-premium-primary/50 transition-all duration-300">
+                <a href="https://github.com/softaav325/" target="_blank" rel="noopener noreferrer" className="group p-4 glass rounded-premium flex items-center gap-4 hover:border-premium-primary/50 transition-all duration-300">
                   <div className="p-2 bg-white/5 rounded-lg group-hover:bg-premium-primary/20 transition-colors">
                     <span className="text-gray-400 group-hover:text-white">🐙</span>
                   </div>
                   <span className="text-gray-300 group-hover:text-white font-medium transition-colors">GitHub</span>
                 </a>
-                <a href="#" className="group p-4 glass rounded-premium flex items-center gap-4 hover:border-premium-primary/50 transition-all duration-300">
+                <a href="https://linkedin.com/in/alexey-andreychenko-a68716358" target="_blank" rel="noopener noreferrer" className="group p-4 glass rounded-premium flex items-center gap-4 hover:border-premium-primary/50 transition-all duration-300">
                   <div className="p-2 bg-white/5 rounded-lg group-hover:bg-premium-primary/20 transition-colors">
                     <span className="text-gray-400 group-hover:text-white">💼</span>
                   </div>
