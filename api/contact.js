@@ -1,22 +1,22 @@
 // /api/contact.js
 import { Resend } from 'resend';
 
-// Инициализация Resend
+// Initialize Resend
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Обработчик запросов
+// Request handler
 export default async function handler(req, res) {
-  // Получаем origin для CORS
+  // Get origin for CORS
   const origin = req.headers.origin || '*';
   
-  // CORS заголовки
+  // CORS headers
   const corsHeaders = {
     'Access-Control-Allow-Origin': origin,
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
   };
 
-  // Обработка preflight OPTIONS запроса
+  // Handle preflight OPTIONS request
   if (req.method === 'OPTIONS') {
     Object.entries(corsHeaders).forEach(([key, value]) => {
       res.setHeader(key, value);
@@ -24,7 +24,7 @@ export default async function handler(req, res) {
     return res.status(204).end();
   }
 
-  // Обработка GET запроса (для тестирования)
+  // Handle GET request (for testing)
   if (req.method === 'GET') {
     Object.entries(corsHeaders).forEach(([key, value]) => {
       res.setHeader(key, value);
@@ -37,7 +37,7 @@ export default async function handler(req, res) {
     });
   }
 
-  // Обработка POST запроса (основная логика)
+  // Handle POST request (main logic)
   if (req.method !== 'POST') {
     Object.entries(corsHeaders).forEach(([key, value]) => {
       res.setHeader(key, value);
@@ -49,7 +49,7 @@ export default async function handler(req, res) {
     });
   }
 
-  // Логируем входящий запрос
+  // Log incoming request
   console.log('=== CONTACT API REQUEST ===');
   console.log('Timestamp:', new Date().toISOString());
   console.log('Method:', req.method);
@@ -58,10 +58,10 @@ export default async function handler(req, res) {
   console.log('Has CONTACT_EMAIL:', !!process.env.CONTACT_EMAIL);
 
   try {
-    // Деструктуризация данных из body
+    // Destructure data from body
     const { name, email, message, subject } = req.body;
 
-    // Валидация обязательных полей
+    // Validate required fields
     if (!name || !email || !message) {
       console.log('Validation failed: Missing required fields');
       Object.entries(corsHeaders).forEach(([key, value]) => {
@@ -74,7 +74,7 @@ export default async function handler(req, res) {
       });
     }
 
-    // Проверка наличия CONTACT_EMAIL
+    // Check if CONTACT_EMAIL is set
     const contactEmail = process.env.CONTACT_EMAIL;
     if (!contactEmail) {
       console.error('Server configuration error: CONTACT_EMAIL is not set');
@@ -87,9 +87,9 @@ export default async function handler(req, res) {
       });
     }
 
-    // Подготовка данных для отправки email
+    // Prepare email data for sending
     const emailData = {
-      from: process.env.EMAIL_FROM || 'Contact Form <onboarding@infraforge.vercel.app>',
+      from: process.env.EMAIL_FROM || 'Contact Form <onboarding@resend.dev>',
       to: [contactEmail],
       subject: `New Contact Form: ${subject || 'General Inquiry'}`,
       html: `
@@ -108,7 +108,7 @@ export default async function handler(req, res) {
 
     console.log('Sending email via Resend...');
 
-    // Отправка email через Resend
+    // Send email via Resend
     const { data, error } = await resend.emails.send(emailData);
 
     if (error) {
@@ -124,7 +124,7 @@ export default async function handler(req, res) {
 
     console.log('✅ Email sent successfully! ID:', data?.id);
 
-    // Успешный ответ
+    // Successful response
     Object.entries(corsHeaders).forEach(([key, value]) => {
       res.setHeader(key, value);
     });
@@ -140,7 +140,7 @@ export default async function handler(req, res) {
     console.error('Error:', error);
     console.error('Stack:', error.stack);
 
-    // Отправка ошибки клиенту
+    // Send error to client
     Object.entries(corsHeaders).forEach(([key, value]) => {
       res.setHeader(key, value);
     });
@@ -151,14 +151,14 @@ export default async function handler(req, res) {
   }
 }
 
-// Утилита для экранирования HTML
+// Utility for HTML escaping
 function escapeHtml(text) {
   if (!text) return '';
   const map = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
+    '&': '&',
+    '<': '<',
+    '>': '>',
+    '"': '"',
     "'": '&#039;',
     '/': '&#x2F;',
     '`': '&#x60;',
