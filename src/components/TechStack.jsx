@@ -20,7 +20,7 @@ const TechStack = () => {
   const tech = [
     { name: 'Kubernetes', icon: <Box size={24} />, category: 'Orchestration', color: 'text-blue-400' },
     { name: 'Terraform', icon: <Settings size={24} />, category: 'IaC', color: 'text-purple-400' },
-    { name: 'AWS', icon: <Cloud size={24} />, category: 'Cloud', color: 'text-orange-400' },
+    { name: 'AZURE, AWS', icon: <Clouds size={24} />, category: 'Clouds', color: 'text-orange-400' },
     { name: 'Docker', icon: <Layers size={24} />, category: 'Virtualization', color: 'text-blue-500' },
     { name: 'Linux', icon: <Terminal size={24} />, category: 'OS', color: 'text-yellow-500' },
     { name: 'Prometheus', icon: <Activity size={24} />, category: 'Monitoring', color: 'text-orange-500' },

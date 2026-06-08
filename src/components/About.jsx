@@ -35,8 +35,7 @@ const About = () => {
 
   const certifications = [
     'CKA (Certified Kubernetes Administrator)',
-    'AWS Solutions Architect Professional',
-    'NVIDIA Certified Associate',
+    'AZURE Solutions Architect Expert',
     'Terraform HashiCorp Certified'
   ];
 
