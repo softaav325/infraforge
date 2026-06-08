@@ -20,20 +20,14 @@ const About = () => {
 
   const timeline = [
     {
-      year: '2024',
-      title: 'AI Infrastructure Specialist',
-      description: 'Leading the deployment of sovereign AI stacks and H100 clusters for enterprise clients.',
-      icon: <Cpu size={20} />,
-    },
-    {
       year: '2022',
-      title: 'Senior Platform Engineer',
-      description: 'Architected auto-scaling Kubernetes platforms handling millions of daily requests.',
+      title: 'Platform Engineer / AI Infrastructure Specialist',
+      description: 'Architected auto-scaling Kubernetes platforms handling millions of daily requests. Leading the deployment of sovereign AI stacks and H100 clusters for enterprise clients.',
       icon: <Code2 size={20} />,
     },
     {
-      year: '2020',
-      title: 'DevOps & Cloud Architect',
+      year: '2019',
+      title: 'Devops / Site Reliability Engineer',
       description: 'Specialized in IaC, CI/CD pipelines and multi-cloud strategy implementation.',
       icon: <Clock size={20} />,
     },
